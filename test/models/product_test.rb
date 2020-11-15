@@ -15,7 +15,7 @@ class ProductTest < ActiveSupport::TestCase
   test "product price must be positive" do
     product = Product.new(title: "My Book Title",
       description: "description",
-      image_url: "image.jpg")
+      image_url: "lorem.jpg")
     product.price = -1
     assert product.invalid?
     assert_equal ["must be greater than or equal to 0.01"],
@@ -59,6 +59,8 @@ class ProductTest < ActiveSupport::TestCase
       image_url: "fred.gif")
 
     assert product.invalid?
-    assert_equal ["has already been taken"], product.errors[:title]
+    # what if it's a custom error - would it still be in the error message table?
+    assert_equal [I18n.translate('errors.messages.taken')], 
+    product.errors[:title]
   end
 end

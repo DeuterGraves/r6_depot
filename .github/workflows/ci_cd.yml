@@ -1,0 +1,84 @@
+name: CI/CD
+on: 
+  push:
+
+jobs:
+  linters:
+    name: Rubocops
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby 2.7.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.1
+          bundler-cache: true
+
+      - name: Install dependencies
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run linters
+        run: bundle exec rubocop --parallel
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.5
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby 2.7.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.1
+          bundler-cache: true
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Set up Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install PostgreSQL 11 client
+        run: sudo apt-get -yqq install libpq-dev
+
+      - name: Build App
+        env:
+          PGHOST: localhost
+          PGUSER: postgres 
+          RAILS_ENV: test
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          yarn install
+          bin/rails db:create
+          bin/rails db:schema:load
+
+      - name: Run tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
+        run: bin/rails test
+          

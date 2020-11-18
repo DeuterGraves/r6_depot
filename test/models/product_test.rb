@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ProductTest < ActiveSupport::TestCase
   fixtures :products
@@ -14,13 +16,13 @@ class ProductTest < ActiveSupport::TestCase
 
   test "product price must be positive" do
     product = Product.new(title: "My Book Title",
-      description: "description",
-      image_url: "lorem.jpg")
+                          description: "description",
+                          image_url: "lorem.jpg")
     product.price = -1
     assert product.invalid?
     assert_equal ["must be greater than or equal to 0.01"],
       product.errors["price"]
-    
+
     product.price = 0
     assert product.invalid?
     assert_equal ["must be greater than or equal to 0.01"],
@@ -32,9 +34,9 @@ class ProductTest < ActiveSupport::TestCase
 
   def new_product(image_url)
     Product.new(title: "My Book Title",
-      description: "description",
-      price: 1,
-      image_url: image_url)
+                description: "description",
+                price: 1,
+                image_url: image_url)
   end
 
   test "image url" do
@@ -43,24 +45,24 @@ class ProductTest < ActiveSupport::TestCase
 
     ok.each do |image_url|
       assert new_product(image_url).valid?
-        "#{image_url} shouldn't be invalid"
+      "#{image_url} shouldn't be invalid"
     end
 
     bad.each do |image_url|
       assert new_product(image_url).invalid?
-        "#{image_url} shouldn't be valid"
+      "#{image_url} shouldn't be valid"
     end
   end
 
   test "product is not valid without a unique title" do
     product = Product.new( title: products(:ruby).title,
-      description: "description",
-      price: 1,
-      image_url: "fred.gif")
+                           description: "description",
+                           price: 1,
+                           image_url: "fred.gif")
 
     assert product.invalid?
     # what if it's a custom error - would it still be in the error message table?
-    assert_equal [I18n.translate('errors.messages.taken')], 
+    assert_equal [I18n.translate("errors.messages.taken")],
     product.errors[:title]
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -17,8 +19,8 @@
 # encoding: utf-8
 
 Product.delete_all
-Product.create!(title: 'Rails, Angular, Postgres, and Bootstrap',
-  description:
+Product.create!(title: "Rails, Angular, Postgres, and Bootstrap",
+                description:
     %{<p>
       <em>Powerful, Effective, and Efficient Full-Stack Web Development</em>
       As a Rails developer, you care about user experience and performance,
@@ -30,11 +32,11 @@ Product.create!(title: 'Rails, Angular, Postgres, and Bootstrap',
       and learn to use these technologies effectively in a Ruby on Rails
       environment.
       </p>},
-  image_url: 'dcbang.jpg',    
-  price: 45.00)
+                image_url: "dcbang.jpg",
+                price: 45.00)
 # . . .
-Product.create!(title: 'Seven Mobile Apps in Seven Weeks',
-  description:
+Product.create!(title: "Seven Mobile Apps in Seven Weeks",
+                description:
     %{<p>
       <em>Native Apps, Multiple Platforms</em>
       Answer the question “Can we build this for ALL the devices?” with a
@@ -43,14 +45,14 @@ Product.create!(title: 'Seven Mobile Apps in Seven Weeks',
       experienced developer needing to expand your options. Plus, you’ll find
       out which cross-platform solution makes the most sense for your needs.
       </p>},
-  image_url: '7apps.jpg',
-  price: 26.00)
+                image_url: "7apps.jpg",
+                price: 26.00)
 # . . .
 
-Product.create!(title: 'Ruby Performance Optimization',
-  description:
+Product.create!(title: "Ruby Performance Optimization",
+                description:
     %{<p>
-      <em>Why Ruby Is Slow, and How to Fix It</em> 
+      <em>Why Ruby Is Slow, and How to Fix It</em>
       You don’t have to accept slow Ruby or Rails performance. In this
       comprehensive guide to Ruby optimization, you’ll learn how to write
       faster Ruby code—but that’s just the beginning. See exactly what makes
@@ -60,23 +62,23 @@ Product.create!(title: 'Ruby Performance Optimization',
       all those “hard” things aren’t so difficult after all, and your code
       will run orders of magnitude faster.
       </p>},
-  image_url: 'adrpo.jpg',
-  price: 46.00)
-# . . . 
+                image_url: "adrpo.jpg",
+                price: 46.00)
+# . . .
 
-Product.create!(title: 'Build Chatbot Interactions',
-  description:
+Product.create!(title: "Build Chatbot Interactions",
+                description:
     %{<p>
       <em>Responsive, Intuitive Interfaces with Ruby</em>
-      The next step in the evolution of user interfaces is here. 
+      The next step in the evolution of user interfaces is here.
       Chatbots let your users interact with your service in their
-      own natural language. Use free and open source tools along 
-      with Ruby to build creative, useful, and unexpected interactions 
-      for users. Take advantage of the Lita framework’s step-by-step 
+      own natural language. Use free and open source tools along
+      with Ruby to build creative, useful, and unexpected interactions
+      for users. Take advantage of the Lita framework’s step-by-step
       implementation strategy to simplify bot development and testing.
-      From novices to experts, chatbots are an area in which everyone 
-      can participate. Exercise your creativity by creating chatbot 
+      From novices to experts, chatbots are an area in which everyone
+      can participate. Exercise your creativity by creating chatbot
       skills for communicating, information, and fun.
       </p>},
-  image_url: 'dpchat.jpg',
-  price: 20.00)
+                image_url: "dpchat.jpg",
+                price: 20.00)

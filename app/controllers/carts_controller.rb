@@ -65,7 +65,7 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def set_cart
     begin
       @cart = Cart.find(params[:id])
@@ -74,7 +74,7 @@ class CartsController < ApplicationController
     end
   end
 
-    # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through.
   def cart_params
     params.fetch(:cart, {})
   end

@@ -67,11 +67,9 @@ class CartsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_cart
-    begin
-      @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       invalid_cart
-    end
   end
 
   # Only allow a list of trusted parameters through.

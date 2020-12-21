@@ -15,6 +15,10 @@
   td.quantity::after {
     content: " ×";
   }
+  td.product-price::after {
+    content: " each";
+
+  }
   td.price {
     font-weight: bold;
     text-align: right;

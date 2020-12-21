@@ -44,7 +44,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select("tr#line-item-#{products(:apps).id}") do
       assert_select "td.quantity", "1"
-      assert_select "td.price", "$99.00"
+      assert_select "td.price", "$29.99"
     end
   end
 

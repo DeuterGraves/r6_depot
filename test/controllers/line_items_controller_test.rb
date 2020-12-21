@@ -28,6 +28,22 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", "Programming Ruby 1.9"
   end
 
+  test "should create line_item with multiple products" do
+    assert_difference("LineItem.count", 2) do
+      post line_items_url, params: { product_id: products(:ruby).id }
+      post line_items_url, params: { product_id: products(:ruby).id }
+      post line_items_url, params: { product_id: products(:apps).id }
+    end
+
+    follow_redirect!
+
+    assert_select "h2", "Your Cart"
+    assert_select("tr#line-item-#{products(:ruby).id}") do
+      assert_select "td.quantity", "2"
+      assert_select "td.price", "$99.00"
+    end
+  end
+
   test "should show line_item" do
     get line_item_url(@line_item)
     assert_response :success

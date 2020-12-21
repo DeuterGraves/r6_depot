@@ -6,7 +6,7 @@
   <h2>Your Cart</h2>
   <table>
   <% @cart.line_items.each do |line_item| %>
-  <tr>
+  <tr id="line-item-<%= line_item.product.id %>">
     <td class="quantity"><%= line_item.quantity %></td> 
     <td><%= line_item.product.title %></td>
     <td class="product-price"><%= number_to_currency(line_item.product.price) %></td>

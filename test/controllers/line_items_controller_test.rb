@@ -42,6 +42,10 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
       assert_select "td.quantity", "2"
       assert_select "td.price", "$99.00"
     end
+    assert_select("tr#line-item-#{products(:apps).id}") do
+      assert_select "td.quantity", "1"
+      assert_select "td.price", "$99.00"
+    end
   end
 
   test "should show line_item" do

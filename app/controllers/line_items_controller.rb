@@ -66,7 +66,7 @@ class LineItemsController < ApplicationController
     title = @line_item.product.title
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to cart_url(cart_id), notice: "#{title} removed from cart." }
+      format.html { redirect_to store_index_url, notice: "#{title} removed from cart." }
       format.json { head :no_content }
     end
   end

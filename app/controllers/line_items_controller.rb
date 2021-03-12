@@ -62,7 +62,6 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    cart_id = @line_item.cart.id
     title = @line_item.product.title
     @line_item.destroy
     respond_to do |format|
